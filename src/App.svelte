@@ -7,20 +7,27 @@
         numbers.push(Math.floor(Math.random()*100));
         numbers = numbers;
     }
+    function removeNumber(i){
+        numbers.splice(i,1);
+        numbers = numbers;
+    }
 </script>
 
 <div class="container">
     <h1>Number:</h1>
     <div>
         {#each numbers as number,i(number)}
-            <button class="element" transition:fly={{
-                delay:0,
-                duration:1000,
-                easing: bounceIn,
-                x:-100,
-                y:-500,
-                opacity:0
-            }}>
+            <button 
+                class="element"
+                on:click={()=>removeNumber(i)} 
+                in:fade={{ duration:1000 }}
+                out:slide={{ duration:500 }}
+                on:introstart={()=>{ console.log('In starts')}}
+                on:introend={()=>{ console.log('In ends')}}
+                on:outrostart={()=>{ console.log('OUT starts')}}
+                on:outroend={()=>{ console.log('OUT ends')}}
+
+            >
                 {number}
             </button>
         {/each}
