@@ -1,6 +1,7 @@
 <script>
     import { fade, blur, slide, scale, fly } from "svelte/transition";
     import { bounceIn, elasticIn } from "svelte/easing";
+    import { flip } from "svelte/animate";
     let numbers = [];
 
     function addNumber(){
@@ -20,13 +21,12 @@
             <button 
                 class="element"
                 on:click={()=>removeNumber(i)} 
-                in:fade={{ duration:1000 }}
-                out:slide={{ duration:500 }}
-                on:introstart={()=>{ console.log('In starts')}}
-                on:introend={()=>{ console.log('In ends')}}
-                on:outrostart={()=>{ console.log('OUT starts')}}
-                on:outroend={()=>{ console.log('OUT ends')}}
-
+                transition:fade={{ duration:500 }}
+                animate:flip={{
+                    delay:0,
+                    duration:300,
+                    easing:bounceIn
+                }}
             >
                 {number}
             </button>
